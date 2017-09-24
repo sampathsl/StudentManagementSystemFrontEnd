@@ -1,0 +1,2 @@
+# StudentManagementSystemFrontEnd
+Frontend project of the StudentManagementSystem
