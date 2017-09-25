@@ -1,2 +1,2 @@
 # StudentManagementSystemFrontEnd
-Frontend project of the StudentManagementSystem
+Angular 4 Frontend project of the StudentManagementSystem
