@@ -22,7 +22,7 @@ export class StudentComponent implements OnInit {
   @Input() studentForm: FormGroup;
   @Input() firstName: FormControl;
   @Input() lastName: FormControl;
-  @Input() dob: FormControl;
+  //@Input() dob: FormControl;
   age: FormControl;
   gender: FormControl;
 
@@ -37,7 +37,7 @@ export class StudentComponent implements OnInit {
   createFormControls() {
     this.firstName = new FormControl('', Validators.compose([Validators.required, Validators.pattern(".{5,50}")]));
     this.lastName = new FormControl('', [Validators.required, Validators.pattern(".{5,100}")]);
-    this.dob = new FormControl('', [Validators.required]);
+    //this.dob = new FormControl('', [Validators.required]);
     this.age = new FormControl('5', [Validators.required]);
     this.gender = new FormControl('MALE', [Validators.required]);
   }
@@ -46,7 +46,6 @@ export class StudentComponent implements OnInit {
     this.studentForm = new FormGroup({
       firstName: this.firstName,
       lastName: this.lastName,
-      dob: this.dob,
       age: this.age,
       gender: this.gender
     });
@@ -81,7 +80,7 @@ export class StudentComponent implements OnInit {
     //frmFirstName = frmFirstName.trim();
     const frmLastName : string = this.studentForm.get('lastName').value;
     //frmLastName = frmLastName.trim();
-    const frmDob : string = this.studentForm.get('dob').value;
+    //const frmDob : string = this.studentForm.get('dob').value;
     //frmDob = frmDob.trim();
     const frmAge : string = this.studentForm.get('age').value;
     //frmAge = frmAge.trim();
@@ -90,7 +89,7 @@ export class StudentComponent implements OnInit {
 
     if (this.studentIdToUpdate === null) {
       //Handle create student
-      const student = new Student(null, frmFirstName, frmLastName, frmDob, frmAge, frmGender);
+      const student = new Student(null, frmFirstName, frmLastName, frmAge, frmGender);
       this.studentService.createStudent(student)
         .subscribe(successCode => {
             this.statusCode = successCode;
@@ -100,7 +99,7 @@ export class StudentComponent implements OnInit {
           errorCode => this.statusCode = errorCode);
     } else {
       //Handle update student
-      const student = new Student(this.studentIdToUpdate, frmFirstName, frmLastName, frmDob, frmAge, frmGender);
+      const student = new Student(this.studentIdToUpdate, frmFirstName, frmLastName, frmAge, frmGender);
       this.studentService.updateStudent(student)
         .subscribe(successCode => {
             this.statusCode = successCode;
@@ -117,7 +116,7 @@ export class StudentComponent implements OnInit {
       .subscribe(student => {
           this.studentIdToUpdate = student.id;
           this.studentForm.setValue({ firstName: student.firstName, lastName: student.lastName ,
-            dob: student.dob , age: student.age , gender: student.gender });
+            age: student.age , gender: student.gender });
           this.requestProcessing = false;
         },
         errorCode =>  this.statusCode = errorCode);
